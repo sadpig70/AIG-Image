@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AIG Image Format v1.1 – Infographic Comparison</title>
+  <style>
+    :root{
+      --bg: #0b0f17;
+      --panel: #111827;
+      --muted: #94a3b8;
+      --text: #e5e7eb;
+      --accent: #7c3aed; /* purple */
+      --accent-2: #06b6d4; /* cyan */
+      --ok: #22c55e;
+      --warn: #f59e0b;
+      --danger: #ef4444;
+      --card: #0f172a;
+      --chip: #1f2937;
+      --border: #243045;
+      --shadow: 0 10px 25px rgba(0,0,0,.35);
+    }
+    @media (prefers-color-scheme: light){
+      :root{ --bg:#f6f8fc; --panel:#ffffff; --text:#0b1220; --muted:#475569; --card:#ffffff; --chip:#eef2ff; --border:#e2e8f0; box-shadow: 0 6px 16px rgba(0,0,0,.08)}
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;background:radial-gradient(1200px 600px at 80% -10%, rgba(124,58,237,.25), transparent 60%), radial-gradient(900px 500px at -10% 110%, rgba(6,182,212,.25), transparent 60%), var(--bg); color:var(--text); font: 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Apple Color Emoji","Segoe UI Emoji"}
+    .wrap{max-width:1100px;margin:48px auto;padding:0 20px}
+    .header{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center}
+    .title{font-size:clamp(26px,4vw,40px);font-weight:800;letter-spacing:.2px;margin:0}
+    .subtitle{margin-top:6px;color:var(--muted);font-size:clamp(14px,2vw,16px)}
+    .badges{display:flex;flex-wrap:wrap;gap:8px}
+    .chip{background:linear-gradient(145deg, rgba(124,58,237,.15), rgba(6,182,212,.15)); border:1px solid var(--border); color:var(--text); padding:8px 12px; border-radius:999px; font-weight:600; font-size:13px; display:inline-flex; align-items:center; gap:8px}
+    .chip svg{width:16px;height:16px}
+
+    .grid{display:grid;grid-template-columns: 1.1fr .9fr; gap:22px; margin-top:22px}
+    @media (max-width: 940px){ .grid{grid-template-columns:1fr;}}
+
+    .card{background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0)); border:1px solid var(--border); border-radius:18px; box-shadow:var(--shadow)}
+    .card h2{margin:0 0 12px 0; font-size:20px}
+    .card .inner{padding:20px}
+
+    .summary{display:grid; gap:14px}
+    .kpi{display:flex; gap:12px; flex-wrap:wrap}
+    .pill{background:var(--chip); color:var(--text); padding:8px 12px; border-radius:999px; border:1px solid var(--border); font-weight:600; font-size:13px}
+
+    .callout{border-left:4px solid var(--accent); background: linear-gradient(135deg, rgba(124,58,237,.10), rgba(6,182,212,.08)); padding:14px 16px; border-radius:12px}
+    .callout strong{color:#fff}
+
+    table{width:100%; border-collapse:separate; border-spacing:0; overflow:hidden; border-radius:14px; border:1px solid var(--border); background:var(--card)}
+    thead th{position:sticky; top:0; background:linear-gradient(180deg, rgba(124,58,237,.12), rgba(124,58,237,.06)); color:#fff; text-align:left; font-size:13px; letter-spacing:.2px; padding:12px 14px; border-bottom:1px solid var(--border)}
+    tbody td{padding:12px 14px; border-bottom:1px solid var(--border); vertical-align:top; font-size:14px}
+    tbody tr:nth-child(odd){background:rgba(255,255,255,.02)}
+    tbody tr:hover{background:rgba(6,182,212,.08)}
+    .tag{display:inline-flex; align-items:center; gap:6px; padding:2px 8px; border-radius:999px; border:1px solid var(--border); font-size:12px; background:rgba(124,58,237,.12)}
+
+    .footer{margin:28px 0 10px; color:var(--muted); font-size:12px; display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap}
+    .btns{display:flex; gap:10px; flex-wrap:wrap}
+    .btn{appearance:none; border:1px solid var(--border); background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,0)); color:var(--text); padding:10px 14px; border-radius:12px; font-weight:700; cursor:pointer}
+    .btn:active{transform:translateY(1px)}
+    .note{color:var(--muted)}
+    code{padding:.15em .35em; background:rgba(255,255,255,.08); border:1px solid var(--border); border-radius:6px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="header">
+      <div>
+        <h1 class="title">AIG Image Format v1.1</h1>
+        <p class="subtitle">AI‑Optimized Image Format with Multi‑Center Radial Similarity Compression (MC‑RSC)</p>
+        <div class="badges" aria-label="highlights">
+          <span class="chip" title="Core‑first decoding">⚡ 2–3× Faster AI Inference</span>
+          <span class="chip" title="Compression ratio">🗜️ 45–55% Compression</span>
+          <span class="chip" title="GPU acceleration">🧮 GPU‑Accelerated</span>
+        </div>
+      </div>
+      <div class="btns">
+        <button class="btn" id="copyBtn" title="Copy section as Markdown">Copy Table (MD)</button>
+        <button class="btn" id="printBtn" title="Print or save as PDF">Print / PDF</button>
+      </div>
+    </header>
+
+    <section class="grid" aria-label="infographic">
+      <article class="card">
+        <div class="inner summary">
+          <h2>Executive Summary</h2>
+          <div class="callout">
+            <p><strong>AIG shifts optimization from the human eye to the AI brain.</strong> It prioritizes semantically important regions (lossless core; lossy periphery), enabling faster first‑pass inference and progressive context refinement. Best for specialized, real‑time AI vision tasks where milliseconds matter.</p>
+          </div>
+          <div class="kpi">
+            <span class="pill">Core‑first decoding</span>
+            <span class="pill">Hierarchical coding (Core → Mid → BG)</span>
+            <span class="pill">Voronoi‑like multi‑center focus</span>
+            <span class="pill">Rate‑distortion optimization</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="inner">
+          <h2>Best Use Cases</h2>
+          <ul>
+            <li>Autonomous driving & drones – object detection on critical regions</li>
+            <li>Real‑time surveillance – event‑centric transmission</li>
+            <li>AR/VR – prioritizing interactive objects</li>
+            <li>Telemedicine – lesion/ROI‑first delivery</li>
+          </ul>
+          <p class="note">Not intended as a general‑purpose photo/archival format; designed for AI pipelines.</p>
+        </div>
+      </article>
+    </section>
+
+    <section class="card" style="margin-top:22px">
+      <div class="inner">
+        <h2>Image Format Technology Comparison</h2>
+        <div style="overflow:auto">
+          <table id="cmpTable">
+            <thead>
+              <tr>
+                <th>Category</th>
+                <th>AIG (v1.1)</th>
+                <th>JPEG</th>
+                <th>PNG</th>
+                <th>WebP</th>
+                <th>AVIF</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Primary Design Goal</strong></td>
+                <td><span class="tag">Real‑time AI analysis optimization</span></td>
+                <td>Human visual optimization</td>
+                <td>Lossless / simple graphics</td>
+                <td>General‑purpose high‑efficiency compression</td>
+                <td>High‑compression, high‑quality</td>
+              </tr>
+              <tr>
+                <td><strong>Compression Method</strong></td>
+                <td>MC‑RSC (multi‑center radial + hierarchical)</td>
+                <td>DCT + quantization</td>
+                <td>DEFLATE lossless</td>
+                <td>DCT + quantization (lossy/lossless)</td>
+                <td>AV1‑based transform</td>
+              </tr>
+              <tr>
+                <td><strong>Key Features</strong></td>
+                <td>Lossless core; lossy surroundings; GPU acceleration</td>
+                <td>Lossy human visual model</td>
+                <td>True lossless; alpha channel</td>
+                <td>High‑efficiency lossy/lossless</td>
+                <td>High compression; HDR support</td>
+              </tr>
+              <tr>
+                <td><strong>AI Processing Speed</strong></td>
+                <td><strong>2–3× faster</strong> (core‑first)</td>
+                <td>Standard</td>
+                <td>Standard</td>
+                <td>Standard</td>
+                <td>Slower (heavier computation)</td>
+              </tr>
+              <tr>
+                <td><strong>Real‑time Capability</strong></td>
+                <td><strong>High</strong> (100×100 @ ~0.4s GPU)</td>
+                <td>Medium</td>
+                <td>Low (lossless)</td>
+                <td>Medium</td>
+                <td>Low</td>
+              </tr>
+              <tr>
+                <td><strong>Compatibility</strong></td>
+                <td>Requires dedicated decoder</td>
+                <td>Very wide</td>
+                <td>Very wide</td>
+                <td>Wide</td>
+                <td>Growing</td>
+              </tr>
+              <tr>
+                <td><strong>Compression Ratio</strong></td>
+                <td>45–55% (AI‑friendly)</td>
+                <td>30–50%</td>
+                <td>Low</td>
+                <td>30–60%</td>
+                <td>30–60%</td>
+              </tr>
+              <tr>
+                <td><strong>Quality Metrics (PSNR/SSIM)</strong></td>
+                <td>30–40 dB / 0.88–0.95</td>
+                <td>30–40 dB / 0.85–0.92</td>
+                <td>Lossless</td>
+                <td>30–40 dB / 0.85–0.92</td>
+                <td>30–45 dB / 0.90–0.95</td>
+              </tr>
+              <tr>
+                <td><strong>Best Use Cases</strong></td>
+                <td><strong>Autonomous driving, drones, real‑time surveillance, AR/VR, telemedicine</strong></td>
+                <td>Photography, web images</td>
+                <td>Logos, UI, transparency</td>
+                <td>Web/app images</td>
+                <td>Next‑gen web, high‑quality media</td>
+              </tr>
+              <tr>
+                <td><strong>Versatility</strong></td>
+                <td>Low</td>
+                <td>High</td>
+                <td>High</td>
+                <td>High</td>
+                <td>Medium</td>
+              </tr>
+              <tr>
+                <td><strong>Implementation Complexity</strong></td>
+                <td><strong>High</strong> (custom AI pipeline)</td>
+                <td>Low</td>
+                <td>Low</td>
+                <td>Medium</td>
+                <td>High</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div>© 2025 AIG v1.1 • CC BY 4.0 • Author: Jung Wook Yang</div>
+      <div class="note">Tip: Use <code>Print / PDF</code> to export this infographic as a handout for investors or partners.</div>
+    </footer>
+  </div>
+
+  <script>
+    // Copy the comparison table as GitHub‑flavored Markdown
+    const copyBtn = document.getElementById('copyBtn');
+    copyBtn?.addEventListener('click', () => {
+      const headers = Array.from(document.querySelectorAll('#cmpTable thead th')).map(th => th.textContent.trim());
+      const rows = Array.from(document.querySelectorAll('#cmpTable tbody tr')).map(tr => Array.from(tr.querySelectorAll('td')).map(td => td.textContent.trim()));
+      const makeRow = (arr) => `| ${arr.join(' | ')} |`;
+      const sep = `|${headers.map(() => '---').join('|')}|`;
+      const md = [ `# Image Format Technology Comparison`, makeRow(headers), sep, ...rows.map(makeRow) ].join('\n');
+      navigator.clipboard.writeText(md).then(() => { copyBtn.textContent = 'Copied!'; setTimeout(()=> copyBtn.textContent='Copy Table (MD)', 1500);});
+    });
+    // Print/PDF
+    document.getElementById('printBtn')?.addEventListener('click', () => window.print());
+  </script>
+</body>
+</html>
